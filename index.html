@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulut Bilişim Mimarileri – Vize Çalışma</title>
+<style>
+:root{--bg:#f3f4fa;--sf:#fff;--tx:#151a2d;--mut:#667089;--bd:#e3e6f2;--h:220;--ac:hsl(var(--h) 78% 52%);--ac2:hsl(calc(var(--h) + 40) 80% 58%);--soft:hsl(var(--h) 90% 96%);--ok:#1f9d55;--no:#e03e52}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1019;--sf:#161b2a;--tx:#eaeefb;--mut:#97a1bc;--bd:#252c43;--soft:hsl(var(--h) 35% 17%);--ac:hsl(var(--h) 85% 68%)}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 Inter,system-ui,"Segoe UI",Roboto,sans-serif}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;overflow:auto;padding:26px 16px;background:var(--sf);border-right:1px solid var(--bd)}
+.brand{padding:0 8px 18px}.brand b{display:block;font-size:1.25rem}.brand span{color:var(--mut);font-size:.85rem}
+.it{display:flex;align-items:center;gap:12px;width:100%;padding:10px 12px;margin:3px 0;border:0;border-radius:14px;background:none;color:var(--tx);font:inherit;text-align:left;cursor:pointer;transition:.15s}
+.it:hover{background:var(--soft)}.it.on{background:var(--soft);box-shadow:inset 3px 0 0 var(--ac);font-weight:600}
+.it i{font-style:normal;display:grid;place-items:center;width:36px;height:36px;border-radius:11px;background:hsl(var(--h) 85% 92%);font-size:1.1rem;flex:none}
+.it span{flex:1;font-size:.95rem}.it em{font-style:normal;font-size:.78rem;color:var(--ok);font-weight:700}
+main{padding:28px clamp(16px,4vw,48px) 60px;max-width:980px;width:100%}
+.hero{border-radius:24px;padding:30px 28px;color:#fff;background:linear-gradient(135deg,hsl(var(--h) 75% 48%),hsl(calc(var(--h) + 45) 80% 52%));box-shadow:0 14px 34px -14px hsl(var(--h) 80% 40%/.6)}
+.hero h1{margin:0 0 4px;font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.2}.hero p{margin:0;opacity:.88}
+.seg{display:inline-flex;gap:4px;margin:20px 0;padding:4px;border-radius:14px;background:var(--sf);border:1px solid var(--bd)}
+.seg button{border:0;padding:9px 20px;border-radius:10px;background:none;color:var(--mut);font:inherit;font-weight:600;cursor:pointer}
+.seg button.on{background:var(--ac);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.nc{background:var(--sf);border:1px solid var(--bd);border-radius:18px;padding:18px;position:relative;overflow:hidden}
+.nc::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+.nc .k{font-weight:700;color:var(--ac);margin-bottom:6px;font-size:1.02rem}.nc div:last-child{color:var(--tx);font-size:.95rem}
+.prog{height:8px;border-radius:9px;background:var(--bd);overflow:hidden}.prog div{height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:.3s}
+.meta{margin:10px 2px;color:var(--mut);font-size:.9rem;font-weight:600}
+.qc{background:var(--sf);border:1px solid var(--bd);border-radius:22px;padding:24px}.qc h3{margin:0 0 18px;font-size:1.2rem;line-height:1.4}
+.o{display:flex;gap:14px;align-items:center;width:100%;text-align:left;margin:10px 0;padding:13px 14px;border:2px solid var(--bd);border-radius:14px;background:none;color:var(--tx);font:inherit;cursor:pointer;transition:.15s}
+.o b{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--soft);color:var(--ac);flex:none}
+.o:hover:not(:disabled){border-color:var(--ac);transform:translateX(3px)}.o:disabled{cursor:default}
+.o.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,transparent)}.o.ok b{background:var(--ok);color:#fff}
+.o.no{border-color:var(--no);background:color-mix(in srgb,var(--no) 14%,transparent)}.o.no b{background:var(--no);color:#fff}
+.fb{margin-top:14px;font-weight:600}.btn{margin-top:16px;border:0;border-radius:12px;padding:12px 22px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.res{text-align:center;padding:20px 0}.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:2rem;font-weight:800}
+.ring span{display:grid;place-items:center;width:116px;height:116px;border-radius:50%;background:var(--sf)}
+@media(max-width:820px){.app{display:block}aside{position:static;height:auto;display:flex;gap:6px;overflow-x:auto;padding:12px;border:0;border-bottom:1px solid var(--bd)}.brand{display:none}.it{width:auto;white-space:nowrap;flex:none}.it span{flex:none}.it i{width:30px;height:30px}.it.on{box-shadow:none}}
+</style></head><body>
+<div class="app"><aside id="side"></aside><main id="main"></main></div>
+<script>
+const T=[
+{t:"Bulut Temelleri",n:[
+"<b>Temel özellikler:</b> isteğe bağlı self servis, geniş ağ erişimi, kaynak havuzu, hızlı esneklik, ölçülen hizmet.",
+"<b>IaaS:</b> sanal makine/ağ/depolama kiralanır; OS ve uygulamayı müşteri yönetir (OS yamaları müşteride).",
+"<b>PaaS:</b> OS yönetilmez, kod ve yapılandırmaya odaklanılır; dil/sürüm uyumuna bakılır.",
+"<b>SaaS:</b> hazır uygulama; müşteri hesap, yetki ve veriyi yönetir. Kontrol arttıkça işletim yükü artar.",
+"<b>Kurulum modelleri:</b> genel, özel, topluluk, hibrit (ayrı altyapıları bağlar), çoklu bulut (birden çok sağlayıcı).",
+"<b>VM</b> kendi OS’ini çalıştırır; <b>konteyner</b> ana makine çekirdeğini paylaşır. Sunucusuz = sunucu var, işletimi sağlayıcıda.",
+"<b>RTO</b> = hizmete dönüş süresi, <b>RPO</b> = kabul edilebilir veri kaybı aralığı. Kimlik doğrulama önce, yetkilendirme sonra. PATCH = kısmi güncelleme."],
+q:[["Sanal makine kiralayıp Linux ve web sunucusunu kendisi kuran kurum hangi modeli kullanır?",["SaaS","PaaS","IaaS","Hibrit bulut"],2],
+["Sunucu işletim sistemini yönetmeden kodunu yönetilen ortama dağıtan ekip hangi modeli kullanır?",["PaaS","IaaS","SaaS","Özel bulut"],0],
+["Hazır web tabanlı e-posta hizmetine abone olmak hangi modeldir?",["IaaS","PaaS","Konteyner orkestrasyonu","SaaS"],3],
+["Hibrit ve çoklu bulut farkı hangisidir?",["Aynı kavramdır","Hibrit ayrı bulut altyapılarını bağlar; çoklu bulut birden fazla sağlayıcı kullanımıdır","Hibrit bir hizmet modelidir","Çoklu bulut tek veri merkezidir"],1],
+["RTO 2 saat, RPO 15 dakika ise doğru yorum hangisidir?",["Hizmet 15 dakikada dönmeli, veri kaybı 2 saati kapsayabilir","Her oturum 2 saat sürmeli","Hizmet en geç 2 saatte dönmeli; veri kaybı en fazla son 15 dakika olabilir","Sistem 2 saatte bir kapatılmalı"],2]]},
+{t:"Mikro Hizmetler",n:[
+"<b>Sınır ölçütü:</b> iş yetenekleri, veri sahipliği, birlikte değişen kurallar (satır sayısı/tablo/ekran değil). Kavram: sınırlandırılmış bağlam.",
+"<b>Modüler monolit:</b> tek ekip, sınırlı kapsam, ortak işlem için iyi başlangıç. Döngüsel çağrılar → sınırları gözden geçir.",
+"<b>API ağ geçidi:</b> yönlendirme, hız sınırı, ortak politika; iş kurallarının merkezi olmamalı.",
+"<b>202 Accepted:</b> istek kabul edildi, işlem bitmemiş olabilir. POST kendiliğinden idempotent değil → <b>idempotency key</b>.",
+"<b>Olay</b> = gerçekleşmiş durum (SiparişOluşturuldu); <b>komut</b> = istenen iş (StokAyır). Mesaj gönderildi ≠ işlendi.",
+"<b>Saga:</b> yerel işlemler + telafi (stok serbest bırak, iptal, iade). Küresel atomiklik yok. Orkestrasyon: merkezi koordinatör; koreografi: olaylara tepki.",
+"<b>İşlemsel giden kutusu:</b> iş verisi + olay kaydı aynı yerel işlemde. Devre kesici, geri basınç, zaman aşımı. p95=400ms → istekleri %95’i ≤400ms.",
+"<b>Probe’lar:</b> readiness (trafik), liveness (yeniden başlatma), startup (uzun açılış)."],
+q:[["Mikro hizmet sınırları öncelikle neye göre belirlenir?",["Aynı satır sayısı","Aynı programlama dili","İş yetenekleri, veri sahipliği ve birlikte değişen iş kuralları","Her tablo = ayrı hizmet"],2],
+["202 Accepted ne demektir?",["Kaynak silindi","İstek kabul edildi; işlem henüz tamamlanmamış olabilir","Tüm adımlar kesin tamamlandı","Veri biçimi geçersiz"],1],
+["Yeniden denemede çift sipariş nasıl önlenir?",["POST zaten idempotenttir","Her denemede yeni anahtar üretmek","Aynı işlem için idempotency key + sunucuda tekrar algılama","Siparişleri silmek"],2],
+["Stok ayrıldı, ödeme başarısız oldu. Uygun telafi?",["Yerel ROLLBACK ile stoğun otomatik dönmesini beklemek","Ayrılan stoğu serbest bırakıp siparişi iptal durumuna almak","Siparişi yine de onaylamak","Ödeme kaydını silip tamamlandı göstermek"],1],
+["İşlemsel giden kutusu hangi sorunu çözer?",["İş verisi ile olay kaydını aynı yerel işlemde saklayıp olayı ayrı süreçle iletir","Tüm hizmetleri tek ACID işlemine alır","Mesajın asla tekrar gelmemesini sağlar","Veritabanını kaldırır"],0]]},
+{t:"Konteyner & Kubernetes",n:[
+"<b>İmaj</b> salt okunur paket; <b>konteyner</b> onun çalışan örneği (yazılabilir katman, silinince kaybolur). Kalıcı veri → volume / PVC.",
+"<b>Etiket</b> (v1) değişebilir; kesin kimlik için <b>digest</b>. Çok aşamalı derleme boyutu ve saldırı yüzeyini azaltır.",
+"<b>Komutlar:</b> -d arka plan, -p port eşleme. docker rm konteyneri siler, imajı silmez. Konteynerde localhost = konteynerin kendisi.",
+"<b>Kubernetes:</b> istenen durum ↔ mevcut durum. kube-apiserver (API), etcd (durum), scheduler (düğüm seçer), kubelet (Pod’ları çalıştırır).",
+"<b>Pod</b> en küçük birim; <b>Deployment</b> kopya+güncelleme; <b>Service</b> kararlı erişim (selector Pod etiketiyle eşleşmeli).",
+"<b>requests</b> zamanlama için, <b>limits</b> üst sınır (CPU kısma, bellek aşımı → sonlandırma). 100m = 0,1 CPU.",
+"<b>Secret</b> base64 ≠ şifreleme. <b>HPA</b> kopya sayısını ayarlar (CPU requests + metrik altyapısı gerekir), düğüm eklemez. PVC yedek sağlamaz."],
+q:[["Linux konteyneri ile VM arasındaki temel fark?",["Konteyner kendi çekirdeğini çalıştırır","Konteyner ana makine çekirdeğini paylaşır; VM konuk işletim sistemi çalıştırır","VM ağ kullanamaz","Konteyner her zaman daha güvenlidir"],1],
+["Üretimde kesin aynı imajı seçmek için ne kullanılır?",["latest etiketi","v1 etiketi","Digest","Kopya sayısı"],2],
+["Service selector app: api, Pod etiketi app: web. Sorun nedir?",["ClusterIP yalnızca makineleri seçer","Selector ile Pod etiketleri eşleşmiyor","Replika sayısı 2","Pod imaj etiketi farklı"],1],
+["requests.cpu: 100m, limits.cpu: 500m ne demektir?",["500 MB bellek isteği","Zamanlamada 0,1 CPU dikkate alınır; 0,5 CPU’da kısma olabilir","Düğüm sayısı 5 olur","requests üst sınırdır"],1],
+["Açılışı uzun süren uygulamanın erken yeniden başlatılmasını hangi yoklama önler?",["readinessProbe","startupProbe","PVC isteği","ConfigMap"],1]]},
+{t:"Bulut Güvenliği",n:[
+"<b>CIA:</b> gizlilik (yetkisiz erişim yok), bütünlük (izinsiz değişiklik yok), erişilebilirlik.",
+"<b>Zafiyet</b> = açıklık (herkese açık depolama); <b>tehdit</b> = zarar verebilecek olay; <b>risk</b> = olasılık × etki.",
+"<b>Paylaşılan sorumluluk:</b> altyapı sağlayıcıda; veri, kimlik, yetki ve yapılandırma müşteride. Sertifika müşteriyi otomatik uyumlu yapmaz.",
+"<b>Risk yönetimi ilk adım:</b> envanter (hesap, hizmet, veri, veri akışı). Prosedür = adımlar, kayıt = yapıldığının kanıtı.",
+"<b>IAM:</b> MFA, en az ayrıcalık, görev ayrılığı, sır yönetimi. Sıfır güven: iç ağda olmak yetmez, kimlik+bağlam+politika.",
+"<b>Standartlar:</b> 27001 (BGYS), 27017 (bulut kontrolleri), 27018 (genel bulutta PII), NIST CSF 2.0 (çerçeve), SP 800-53 (kontrol kataloğu), CSA CCM (kontrol–sorumluluk eşleme), PCI DSS (kart verisi), SOC 2 (bağımsız denetçi raporu).",
+"<b>KVKK:</b> “veri Türkiye’de” yetmez; destek erişimi, alt işleyen, yedek konumu ve sözleşmeler incelenir. Şifreleme yedeğin yerini tutmaz."],
+q:[["Öğrenci notlarının izinsiz değiştirilmesini önleyip denetlenebilir kılan kontrol hangi hedefi destekler?",["Gizlilik","Erişilebilirlik","Bütünlük","Taşınabilirlik"],2],
+["Sağlayıcının güvenlik sertifikası müşteri için ne ifade eder?",["Müşteri otomatik uyumludur","Kapsam incelenmeli; müşterinin veri, kimlik ve yapılandırma sorumlulukları sürer","Yedekler kesin geri yüklenir","Günlükler kaldırılabilir"],1],
+["RTO 3 saat, RPO 20 dakika ise?",["Hizmet dönüşü en fazla 3 saat; kabul edilebilir veri kaybı en fazla son 20 dakika","Veriler 3 saat saklanır","Dönüş 20 dk; veri kaybı 3 saat","Sistem 3 saatte bir kapanır"],0],
+["PCI DSS ve SOC 2 ayrımı?",["Aynı belgenin adıdır","PCI DSS kart verisi standardı; SOC 2 belirli kapsam/dönemi ele alan bağımsız denetçi raporudur","SOC 2 bir kanundur","PCI DSS konteyner biçimidir"],1],
+["Sıfır güven yaklaşımı nedir?",["Bir ürün satın almak","İç ağdaki cihazlara sınırsız erişim","Güvenlik duvarı varsa kimlik gerekmez","İç ağda olmak tek başına güven nedeni değildir; kimlik, bağlam ve politika değerlendirilir"],3]]},
+{t:"CI/CD",n:[
+"<b>CI:</b> sık birleştirme + otomatik derleme/test. Araç tek başına yetmez; uzun ömürlü dallar ve bekleyen kırık testler CI değildir.",
+"<b>Sürekli teslim:</b> üretime geçişte insan onayı olabilir. <b>Sürekli dağıtım:</b> kontrolleri geçen otomatik üretime gider.",
+"<b>Özellik bayrağı:</b> kod dağıtımı ile özelliğin açılması ayrılır.",
+"<b>Derleme ürünü</b> saklanan çıktı; <b>önbellek</b> hazırlık maliyetini azaltan yardımcı veri. Aynı ürünü ortamlar arasında ilerlet.",
+"<b>Test:</b> sözleşme testi (API alan/tür uyumu), flaky test → kök nedeni bul, kod kapsamı hata yokluğu kanıtlamaz. “|| true” başarısızlığı gizler.",
+"<b>GitHub Actions:</b> on = tetikleyici, jobs = işler, steps = adımlar. Birleştirmeyi engellemek için dal koruma kuralı + zorunlu kontrol.",
+"<b>Stratejiler:</b> mavi-yeşil (iki ortam arası geçiş), kanarya (sınırlı trafik), rolling. GitOps: uzlaştırıcı mevcut durumu depodaki istenen duruma getirir.",
+"<b>Geri dönüş:</b> imaj geri dönüşü silinen sütunu geri getirmez. Değişiklik başarısızlık oranı = acil müdahaleli / toplam dağıtım."],
+q:[["Sürekli teslim ile sürekli dağıtım farkı?",["Fark yoktur","Teslimde üretime geçişte insan onayı olabilir; dağıtımda kontrolleri geçen değişiklik otomatik üretime alınır","Teslim yalnızca mikroservis içindir","Teslimde test yapılmaz"],1],
+["Kod üretimde ama özelliğin açılması sonraya bırakılıyor. Hangi mekanizma?",["Bağımlılık önbelleği","Commit mesajı","Özellik bayrağı","Kod kapsamı"],2],
+["Test komutunun sonuna “|| true” eklemenin riski?",["Üretim verisini siler","Test başarısızlığını gizleyip hattı başarılı gösterebilir","Önceki commite döner","Sınır durumları üretir"],1],
+["İki ayrı ortam hazırlanıp trafik bunlar arasında geçiriliyor. Strateji?",["Mavi-yeşil dağıtım","Kanarya","Rolling","Önbellek yenileme"],0],
+["Ayda 40 dağıtımın 4’ü acil müdahale, 6 plansız dağıtım var. Değişiklik başarısızlık ve yeniden çalışma oranları?",["%4 ve %6","%25 ve %40","%15 ve %10","%10 ve %15"],3]]},
+{t:"DevOps",n:[
+"<b>Amaç:</b> geliştirme ve işletimi ortak hedef, kısa geri bildirim ve güvenilir otomasyonla birleştirmek. Ortak sahiplik: sorumlular ve yetkiler net.",
+"<b>Olay sonrası inceleme:</b> suçlu aramadan zaman çizelgesi, teknik koşullar, tekrarını önleyen iyileştirmeler.",
+"<b>Küçük, sık değişiklik:</b> hata nedenini bulmayı ve birleştirmeyi kolaylaştırır. Yüksek etkili değişiklikte insan onayı gerekebilir.",
+"<b>Sır güvenliği:</b> Git geçmişine giren anahtar silinse de riskte; iptal/yenile. CI/CD’de kısa ömürlü kimlik (OIDC).",
+"<b>Altyapı sapma tespiti:</b> gerçek durum ↔ onaylı kod tanımı farkı. Otomatik yeniden başlatma mantık/veri hatasını çözmez.",
+"<b>Gözlem:</b> hizmetler arası gecikme için dağıtık iz. <b>SLI</b> ölçüm, <b>SLO</b> hedef, <b>SLA</b> sözleşme taahhüdü.",
+"<b>Hata bütçesi</b> = 100% − SLO (%99,9 → %0,1). <b>DORA:</b> değişiklik başarısızlık oranı = 5/50 = %10; ölçütler kullanıcı etkisiyle birlikte yorumlanır.",
+"<b>Canary:</b> sınırlı trafikle hata oranı/gecikme eşiklerine göre değerlendirme."],
+q:[["Aylık isteklerin en az %99,9’u başarılı olmalı. Hata bütçesi?",["%1","%0,1","%9,9","%99,9"],1],
+["50 dağıtımın 5’i acil düzeltme/geri dönüş gerektirdi. Değişiklik başarısızlık oranı?",["%5","%50","%10","%20"],2],
+["SLI, SLO ve SLA ilişkisi?",["SLI hedef, SLO ölçüm, SLA araç","Hepsi aynıdır","SLI ölçülen davranış; SLO bu ölçü için hedef; SLA taraflar arası hizmet taahhüdü","SLI sözleşmedir"],2],
+["Gizli anahtar Git’e kaydedilip sonra dosyadan silindi. Doğru değerlendirme?",["Dosyadan silmek yeterlidir","Yorum satırı yapmak güvenlidir","Depo özelse sorun yoktur","Geçmişteki kopyalar da ele alınmalı; yalnızca silmek yeterli değildir"],3],
+["indirimli_fiyat fiyat negatifse veya oran 0–1 dışındaysa ValueError üretir. Hangisi doğrudur?",["indirimli_fiyat(100, 0.25) → 25","indirimli_fiyat(100, 1) → 100","indirimli_fiyat(100, 1.2) → ValueError","indirimli_fiyat(-100, 0.25) → -75"],2]]}
+];
+const E=["☁️","🧩","📦","🛡️","🔁","🤝","🎯"],H=[210,265,190,350,150,30,300],best={};
+const side=document.getElementById("side"),main=document.getElementById("main"),root=document.documentElement;
+const TOT=T.reduce((a,t)=>a+t.q.length,0);let cur=0,mode="n";
+const names=[...T.map(t=>t.t),"Karışık Test"];
+function drawSide(){side.innerHTML='<div class="brand"><b>Vize Çalışma</b><span>Bulut Bilişim Mimarileri</span></div>'+names.map((n,i)=>`<button class="it ${i==cur?"on":""}" style="--h:${H[i]}" onclick="go(${i})"><i>${E[i]}</i><span>${n}</span><em>${best[i]!=null?best[i]+"/"+(i<T.length?T[i].q.length:TOT):""}</em></button>`).join("")}
+function go(i){cur=i;mode=i<T.length?"n":"q";drawSide();view()}
+function view(){root.style.setProperty("--h",H[cur]);const m=cur>=T.length,t=T[cur];
+main.innerHTML=`<div class="hero"><h1>${E[cur]} ${names[cur]}</h1><p>${m?TOT+" soru · tüm konulardan, şıklar karışık":t.n.length+" kısa not · "+t.q.length+" soru"}</p></div>`+(m?"":`<div class="seg"><button class="${mode=="n"?"on":""}" onclick="mode='n';view()">📖 Notlar</button><button class="${mode=="q"?"on":""}" onclick="mode='q';view()">✍️ Test</button></div>`);
+const box=document.createElement("div");box.style.marginTop=m?"22px":"0";main.appendChild(box);
+if(mode=="n"&&!m){box.className="grid";box.innerHTML=t.n.map(x=>{const r=x.match(/^<b>(.*?)<\/b>\s*([\s\S]*)$/);return `<div class="nc"><div class="k">${r[1].replace(/:$/,"")}</div><div>${r[2]}</div></div>`}).join("")}
+else{let L=m?T.flatMap(t=>t.q).map(x=>{const c=x[1][x[2]],o=[...x[1]].sort(()=>Math.random()-.5);return[x[0],o,o.indexOf(c)]}).sort(()=>Math.random()-.5):t.q;quiz(L,box)}
+window.scrollTo(0,0)}
+function quiz(L,box){let i=0,s=0;
+function show(){const x=L[i];box.innerHTML=`<div class="meta">Soru ${i+1} / ${L.length}</div><div class="prog"><div style="width:${i/L.length*100}%"></div></div><div class="qc" style="margin-top:14px"><h3>${x[0]}</h3>${x[1].map((o,k)=>`<button class="o"><b>${"ABCDE"[k]}</b><span>${o}</span></button>`).join("")}<div class="fb"></div></div>`;
+const bs=[...box.querySelectorAll(".o")],fb=box.querySelector(".fb");
+bs.forEach((b,k)=>b.onclick=()=>{bs.forEach(y=>y.disabled=true);bs[x[2]].classList.add("ok");if(k==x[2]){s++;fb.textContent="✅ Doğru!"}else{b.classList.add("no");fb.textContent="❌ Doğru cevap: "+"ABCDE"[x[2]]+") "+x[1][x[2]]}
+const n=document.createElement("button");n.className="btn";n.textContent=i+1<L.length?"Sonraki →":"Sonucu gör";n.onclick=()=>{i++;i<L.length?show():end()};fb.after(n)})}
+function end(){best[cur]=Math.max(best[cur]||0,s);drawSide();const p=Math.round(s/L.length*100);
+box.innerHTML=`<div class="qc res"><div class="ring" style="background:conic-gradient(var(--ac) ${p}%,var(--bd) 0)"><span>%${p}</span></div><h3>${s} / ${L.length} doğru</h3><p style="color:var(--mut)">${p>=80?"Harika, konuya hâkimsin! 🎉":p>=50?"İyi gidiyorsun, notlara bir göz at.":"Notları tekrar okuyup yeniden dene."}</p><button class="btn" onclick="view()">🔁 Tekrar çöz</button></div>`}
+show()}
+go(0);
+</script></body></html>
